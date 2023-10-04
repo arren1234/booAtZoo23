@@ -59,6 +59,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "wisp4"
     },
+    "image11": {
+        "data": "hwQQABAAAAAA8A8AAAAAAAD//wAAAAAA8H93//8PAADwd3d3d/8AAPB3f3d39w8A8Hd3d3d3DwDwd3d3d3f3D/B3d3d3d/f/8Hd/d3f3DwDwd3d3d/8AAPB3d/f/DwAA8Hd3/wAAAADwd/cPAAAAAPB3/wAAAAAA8P8PAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "wispH"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

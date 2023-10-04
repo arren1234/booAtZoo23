@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const Health = SpriteKind.create()
+}
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerU`)
 })
@@ -19,6 +22,11 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSpri
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerR0`)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Health, function (sprite, otherSprite) {
+    otherSprite.startEffect(effects.ashes)
+    sprites.destroy(otherSprite)
+    info.changeLifeBy(1)
+})
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     scene.cameraShake(4, 500)
     info.changeLifeBy(-1)
@@ -36,8 +44,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     sprites.destroy(otherSprite)
     info.changeScoreBy(1)
 })
+let wispType = 0
 let wisp: Sprite = null
-let image2 = 0
+let wispSpecial = 0
 let evilAngle = 0
 let evilSpeed = 0
 let evilBoy: Sprite = null
@@ -59,17 +68,22 @@ controller.moveSprite(spookyBoy)
 evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
 info.setLife(3)
 game.onUpdateInterval(200, function () {
-    image2 = randint(0, 4)
-    if (image2 == 0) {
-        wisp = sprites.create(assets.image`wisp1`, SpriteKind.Food)
-    } else if (image2 == 1) {
-        wisp = sprites.create(assets.image`wisp2`, SpriteKind.Food)
-    } else if (image2 == 2) {
-        wisp = sprites.create(assets.image`wisp3`, SpriteKind.Food)
-    } else if (image2 == 3) {
-        wisp = sprites.create(assets.image`wisp4`, SpriteKind.Food)
+    wispSpecial = randint(0, 50)
+    if (wispSpecial == 0) {
+        wisp = sprites.create(assets.image`wispH`, SpriteKind.Health)
     } else {
-        wisp = sprites.create(assets.image`wisp5`, SpriteKind.Food)
+        wispType = randint(0, 4)
+        if (wispType == 0) {
+            wisp = sprites.create(assets.image`wisp1`, SpriteKind.Food)
+        } else if (wispType == 1) {
+            wisp = sprites.create(assets.image`wisp2`, SpriteKind.Food)
+        } else if (wispType == 2) {
+            wisp = sprites.create(assets.image`wisp3`, SpriteKind.Food)
+        } else if (wispType == 3) {
+            wisp = sprites.create(assets.image`wisp4`, SpriteKind.Food)
+        } else {
+            wisp = sprites.create(assets.image`wisp5`, SpriteKind.Food)
+        }
     }
     wisp.setVelocity(randint(-10, 10), randint(-25, -1))
     wisp.setPosition(randint(-15, 175), 150)
