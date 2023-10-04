@@ -64,6 +64,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "evilN"
     },
+    "image12": {
+        "data": "hwQQABAAAAAAAPD/DwAAAAD/b2b/DwAA8G9mZmb/AADwZmZmZvYPAPBvZmZmZv8AAG/2ZmZm9gAAb2ZmZmZmDwD/ZmZmZmb/APBmZmZmZv8A/2ZmZmZmDwBv9mZmZvYPAG9mZmZm9gAA8G9mZmb/AAAA/29m9g8AAAAA////AAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "wispT"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

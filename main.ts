@@ -1,15 +1,19 @@
 namespace SpriteKind {
     export const Health = SpriteKind.create()
+    export const Time = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerU`)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Time, function (sprite, otherSprite) {
+    otherSprite.startEffect(effects.ashes)
+    sprites.destroy(otherSprite)
+    info.changeCountdownBy(10)
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerL`)
 })
 info.onCountdownEnd(function () {
-    game.splash("" + info.score() + " + " + "(" + info.life() + " * " + "25" + ")")
-    info.changeScoreBy(info.life() * 25)
     game.gameOver(true)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSprite) {
@@ -23,9 +27,13 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerR0`)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Health, function (sprite, otherSprite) {
+    if (info.life() < 3) {
+        info.changeLifeBy(1)
+    } else {
+        info.changeScoreBy(25)
+    }
     otherSprite.startEffect(effects.ashes)
     sprites.destroy(otherSprite)
-    info.changeLifeBy(1)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     scene.cameraShake(4, 500)
@@ -69,9 +77,11 @@ controller.moveSprite(spookyBoy)
 evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
 info.setLife(3)
 game.onUpdateInterval(200, function () {
-    wispSpecial = randint(0, 50)
+    wispSpecial = randint(0, 100)
     if (wispSpecial == 0) {
         wisp = sprites.create(assets.image`wispH`, SpriteKind.Health)
+    } else if (wispSpecial == 1) {
+        wisp = sprites.create(assets.image`wispT`, SpriteKind.Time)
     } else {
         wispType = randint(0, 4)
         if (wispType == 0) {
