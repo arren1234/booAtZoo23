@@ -8,8 +8,8 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerL`)
 })
 info.onCountdownEnd(function () {
-    game.splash("" + info.score() + " + " + "(" + info.life() + " * " + "50" + ")")
-    info.changeScoreBy(info.life() * 50)
+    game.splash("" + info.score() + " + " + "(" + info.life() + " * " + "25" + ")")
+    info.changeScoreBy(info.life() * 25)
     game.gameOver(true)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSprite) {
@@ -51,6 +51,7 @@ let evilAngle = 0
 let evilSpeed = 0
 let evilBoy: Sprite = null
 let spookyBoy: Sprite = null
+game.splash("Collect Wisps", "Avoid Enemy")
 game.setGameOverEffect(true, effects.confetti)
 game.setGameOverEffect(false, effects.dissolve)
 info.startCountdown(60)
