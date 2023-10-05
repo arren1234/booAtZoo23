@@ -14,7 +14,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerL`)
 })
 info.onCountdownEnd(function () {
-    game.gameOver(true)
+	
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSprite) {
     sprite.startEffect(effects.fire, 500)
@@ -36,6 +36,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Health, function (sprite, otherS
     sprites.destroy(otherSprite)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Noise, 2334, 0, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
     scene.cameraShake(4, 500)
     info.changeLifeBy(-1)
     evilBoy.setPosition(160, 0)
@@ -45,7 +46,11 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerD`)
 })
 info.onLifeZero(function () {
-    game.gameOver(false)
+    if (info.score() >= 150) {
+        game.gameOver(true)
+    } else {
+        game.gameOver(false)
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.startEffect(effects.ashes)
@@ -62,6 +67,8 @@ let spookyBoy: Sprite = null
 game.splash("Collect Wisps", "Avoid Enemy")
 game.setGameOverEffect(true, effects.confetti)
 game.setGameOverEffect(false, effects.dissolve)
+game.setGameOverPlayable(false, music.stringPlayable(music.convertRTTTLToMelody("s:d=4,o=5,b=125:c,8c#,c,8d,c,8d#,c,8e,c,f,e,d#,d,c#,c,1c4"), 200), false)
+game.setGameOverPlayable(true, music.stringPlayable(music.convertRTTTLToMelody("s:d=4,o=5,b=125:8f#,c,8f,c,8e,c,8d#,c,8d,c,8c#,c,c#,d,d#,e,f,f#,1c"), 200), false)
 info.startCountdown(60)
 scene.setBackgroundImage(assets.image`BG`)
 info.setScore(0)
@@ -76,6 +83,7 @@ evilBoy.setBounceOnWall(true)
 controller.moveSprite(spookyBoy)
 evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
 info.setLife(3)
+music.play(music.createSoundEffect(WaveShape.Noise, 1, 5000, 124, 255, 999, SoundExpressionEffect.Warble, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
 game.onUpdateInterval(200, function () {
     wispSpecial = randint(0, 100)
     if (wispSpecial == 0) {
