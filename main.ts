@@ -4,6 +4,7 @@ namespace SpriteKind {
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerU`)
+    music.play(music.createSoundEffect(WaveShape.Sine, 54, 553, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Time, function (sprite, otherSprite) {
     otherSprite.startEffect(effects.ashes)
@@ -13,9 +14,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Time, function (sprite, otherSpr
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerL`)
+    music.play(music.createSoundEffect(WaveShape.Sine, 54, 553, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 info.onCountdownEnd(function () {
-	
+    info.setLife(0)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSprite) {
     sprite.startEffect(effects.fire, 500)
@@ -27,6 +29,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSpri
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerR0`)
+    music.play(music.createSoundEffect(WaveShape.Sine, 54, 553, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Health, function (sprite, otherSprite) {
     if (info.life() < 3) {
@@ -50,9 +53,10 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerD`)
+    music.play(music.createSoundEffect(WaveShape.Sine, 54, 553, 255, 0, 50, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 info.onLifeZero(function () {
-    if (info.score() >= 150) {
+    if (info.score() >= 500) {
         game.gameOver(true)
     } else {
         game.gameOver(false)
@@ -92,7 +96,7 @@ game.setGameOverEffect(true, effects.confetti)
 game.setGameOverEffect(false, effects.dissolve)
 game.setGameOverPlayable(false, music.stringPlayable(music.convertRTTTLToMelody("s:d=4,o=5,b=125:c,8c#,c,8d,c,8d#,c,8e,c,f,e,d#,d,c#,c,1c4"), 200), false)
 game.setGameOverPlayable(true, music.stringPlayable(music.convertRTTTLToMelody("s:d=4,o=5,b=125:8f#,c,8f,c,8e,c,8d#,c,8d,c,8c#,c,c#,d,d#,e,f,f#,1c"), 200), false)
-info.startCountdown(60)
+info.startCountdown(45)
 scene.setBackgroundImage(assets.image`BG`)
 info.setScore(0)
 spookyBoy = sprites.create(assets.image`playerN`, SpriteKind.Player)
