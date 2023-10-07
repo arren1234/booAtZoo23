@@ -9,6 +9,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Time, function (sprite, otherSpr
     otherSprite.startEffect(effects.ashes)
     sprites.destroy(otherSprite)
     info.changeCountdownBy(10)
+    music.play(music.createSoundEffect(WaveShape.Square, 1273, 1808, 136, 255, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerL`)
@@ -22,6 +23,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Food, function (sprite, otherSpri
     evilSpeed += 5
     evilAngle = Math.random() * Math.PI * 2
     evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
+    music.play(music.createSoundEffect(WaveShape.Triangle, 339, 1, 255, 255, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerR0`)
@@ -34,6 +36,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Health, function (sprite, otherS
     }
     otherSprite.startEffect(effects.ashes)
     sprites.destroy(otherSprite)
+    music.play(music.createSoundEffect(WaveShape.Sine, 1363, 1592, 131, 255, 126, SoundExpressionEffect.None, InterpolationCurve.Logarithmic), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Noise, 2334, 0, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
@@ -61,11 +64,13 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Health, function (sprite, otherSp
     evilSpeed += 5
     evilAngle = Math.random() * Math.PI * 2
     evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
+    music.play(music.createSoundEffect(WaveShape.Triangle, 339, 1, 255, 255, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.startEffect(effects.ashes)
     sprites.destroy(otherSprite)
     info.changeScoreBy(info.life())
+    music.play(music.createSoundEffect(WaveShape.Sine, 1, 5000, 0, 92, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Time, function (sprite, otherSprite) {
     sprite.startEffect(effects.fire, 500)
@@ -73,6 +78,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Time, function (sprite, otherSpri
     evilSpeed += 5
     evilAngle = Math.random() * Math.PI * 2
     evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
+    music.play(music.createSoundEffect(WaveShape.Triangle, 339, 1, 255, 255, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 let wispType = 0
 let wisp: Sprite = null
