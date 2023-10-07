@@ -39,8 +39,11 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     music.play(music.createSoundEffect(WaveShape.Noise, 2334, 0, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
     scene.cameraShake(4, 500)
     info.changeLifeBy(-1)
-    evilBoy.setPosition(160, 0)
     evilBoy.setVelocity(Math.cos(evilAngle) * evilSpeed, Math.sin(evilAngle) * evilSpeed)
+    sprite.setFlag(SpriteFlag.Ghost, true)
+    sprite.startEffect(effects.fire, 1000)
+    pause(1000)
+    sprite.setFlag(SpriteFlag.Ghost, false)
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     spookyBoy.setImage(assets.image`playerD`)
@@ -62,7 +65,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Health, function (sprite, otherSp
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.startEffect(effects.ashes)
     sprites.destroy(otherSprite)
-    info.changeScoreBy(1)
+    info.changeScoreBy(info.life())
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Time, function (sprite, otherSprite) {
     sprite.startEffect(effects.fire, 500)
@@ -119,6 +122,7 @@ game.onUpdateInterval(200, function () {
         }
     }
     wisp.setVelocity(randint(-10, 10), randint(-25, -1))
-    wisp.setPosition(randint(-15, 175), 150)
+    wisp.setPosition(randint(-15, 175), 120)
     wisp.scale = Math.randomRange(0.5, 1.5)
+    wisp.setFlag(SpriteFlag.AutoDestroy, true)
 })
